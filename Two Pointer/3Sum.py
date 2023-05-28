@@ -7,29 +7,27 @@ class Solution(object):
         def twosum(target_value,i):
             left = i+1
             right = len(nums)-1
-            res1 = []
+            res1 = set()
             while left<right:
                 if (nums[left]+nums[right])<target_value:
                     left+=1
                 elif(nums[left]+nums[right])>target_value:
                     right-=1 
                 else:
-                    res1.append([nums[left],nums[right],nums[i]])
+                    res1.add((nums[left],nums[right],nums[i]))
                     left+=1
                     right-=1
 
             return res1
 
-        nums.sort() #O(nlogn)
+        nums.sort()
         res = []
-        for i in range(len(nums)):#O(n)
+        for i in range(len(nums)):
             ans = twosum(-nums[i],i)
             if ans:
                 for arr in ans:
-                    arr.sort()
                     if arr not in res:
                         res.append(arr)
           
                
-        return res
-        
+        return list(res)
